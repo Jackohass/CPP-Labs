@@ -5,10 +5,6 @@
 #include<cmath>
 #include<iostream>
 
-/*TODO:
-* Answer questions
-*/
-
 using namespace std;
 
 template <class T>
