@@ -145,8 +145,7 @@ public:
     }
     vector<ChessMove> nonCapturingMoves()
     {
-        vector<ChessMove> toReturn;
-        toReturn.reserve(8);
+        vector<ChessMove> toReturn(8);
         int moves[8][2] {
             {x-1,y+1},
             {x,y+1},
@@ -182,8 +181,8 @@ protected:
         return 0;
     }
     // may be implemented as string
-    string utfRepresentation() const {return (isWhite ? "♔" : "♚");}
-    char latin1Representation() const {return (isWhite ? 'K' : 'k');}
+    string utfRepresentation() const {return (isWhite ? "♘" : "♞");}
+    char latin1Representation() const {return (isWhite ? 'N' : 'n');}
 
 public:
     Knight(int xPos, int yPos, bool isWhity, ChessBoard * boardy) : ChessPiece(xPos, yPos, isWhity, boardy) {}
@@ -230,14 +229,77 @@ public:
     }
 };
 
-// class Pawn : ChessPiece
-// {
-// private:
-//     /* data */
-// public:
-//     Pawn(/* args */);
-//     ~Pawn();
-// };
+class Pawn : public ChessPiece
+{
+private:
+    /* data */
+
+protected:
+    int validMove(int to_x, int to_y)
+    {
+        if(isWhite)
+        {
+            if(to_x == x && (to_y == y-1 || (y == 6 && to_y == y-2)))
+            {
+                return ChessPiece::validMove(to_x, to_y) == 1;
+            }
+            else if(to_y == y-1 && (to_x == x-1 || to_x == x+1))
+            {
+                return ChessPiece::validMove(to_x, to_y) == 2 ? 2 : 0;
+            }
+            return 0;
+        }
+        else
+        {
+            if(to_x == x && (to_y == y+1 || (y == 1 && to_y == y+2)))
+            {
+                return ChessPiece::validMove(to_x, to_y) == 1;
+            }
+            else if(to_y == y+1 && (to_x == x-1 || to_x == x+1))
+            {
+                return ChessPiece::validMove(to_x, to_y) == 2 ? 2 : 0;
+            }
+            return 0;
+        }
+    }
+    // may be implemented as string
+    string utfRepresentation() const {return (isWhite ? "♙" : "♟︎");}
+    char latin1Representation() const {return (isWhite ? 'P' : 'p');}
+
+public:
+    Pawn(int xPos, int yPos, bool isWhity, ChessBoard * boardy) : ChessPiece(xPos, yPos, isWhity, boardy) {}
+
+    vector<ChessMove> capturingMoves()
+    {
+        vector<ChessMove> toReturn;
+        toReturn.reserve(2);
+        int moves[2][2] = {
+            {x+1,y+1-2*isWhite},
+            {x-1,y+1-2*isWhite}
+        };
+        for (int i = 0; i < 2; i++)
+        {
+            if(capturingMove(moves[i][0], moves[i][1])) toReturn.push_back(ChessMove{x,y,moves[i][0],moves[i][1],this});
+        }
+        return toReturn;
+    }
+    vector<ChessMove> nonCapturingMoves()
+    {
+        vector<ChessMove> toReturn;
+        toReturn.reserve(2);
+        if(isWhite)
+        {
+            if(nonCapturingMove(x, y-1)) toReturn.push_back(ChessMove{x,y,x,y-1,this});
+            if(y == 6 && nonCapturingMove(x, y-2)) toReturn.push_back(ChessMove{x,y,x,y-2,this});
+        }
+        else
+        {
+            if(nonCapturingMove(x, y+1)) toReturn.push_back(ChessMove{x,y,x,y+1,this});
+            if(y == 1 && nonCapturingMove(x, y+2)) toReturn.push_back(ChessMove{x,y,x,y+2,this});
+        }
+        return toReturn;
+    }
+};
 
 // class Bishop : ChessPiece
 // {

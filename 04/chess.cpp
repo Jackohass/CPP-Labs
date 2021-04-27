@@ -73,6 +73,18 @@ ChessBoard& operator>>(istream& is, ChessBoard& cb)
             case 'k':
             board(x,y) = make_shared<King>(x,y,false,&cb);
             break;
+            case 'N':
+            board(x,y) = make_shared<Knight>(x,y,true,&cb);
+            break;
+            case 'n':
+            board(x,y) = make_shared<Knight>(x,y,false,&cb);
+            break;
+            case 'P':
+            board(x,y) = make_shared<Pawn>(x,y,true,&cb);
+            break;
+            case 'p':
+            board(x,y) = make_shared<Pawn>(x,y,false,&cb);
+            break;
             default:
             cerr << "oops, that is not supposed to happen. Or it isn't implemented yet\n";
             break;
@@ -90,16 +102,16 @@ ostream& operator<<(ostream& os, ChessBoard& cb)
         for (int y = 0; y < 8; y++)
         {
             const ChessPiece* piece = cb.getPiece(y,x);
-            os << ((piece == nullptr) ? "." : piece->print(false));
+            os << ((piece == nullptr) ? "." : piece->print(true));
         }
         os << "\n";
     }
     return os;
 }
 
-ostream& operator<<(ostream& os, ChessMove& cm)
+ostream& operator<<(ostream& os, const ChessMove& cm)
 {
-    os << cm.piece->print(true) << ": (" << cm.from_x << "," << cm.from_y << ")->(" << cm.to_X << "," << cm.to_Y << ")";
+    os << cm.piece->print(true) << ": (" << cm.from_x << "," << cm.from_y << ")->(" << cm.to_x << "," << cm.to_y << ")";
     return os;
 }
 
