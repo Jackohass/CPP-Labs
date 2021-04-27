@@ -24,9 +24,11 @@ int main()
     } else {
         cout << "capturingMoves PASSED, expected 0 moves and got " << v.size() << " moves" << endl;
     }
+    cout << "capturingMoves: " << v << endl;
 
     vector<ChessMove> v0 = chess.nonCapturingMoves(true);
     cout << "nonCapturingMoves: expected ? moves but got " << v0.size() << " moves" << endl;
+    cout << "nonCapturingMoves: " << v0 << endl;
 
     cout << chess << endl;
     return 0;

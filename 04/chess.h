@@ -175,7 +175,7 @@ protected:
     {
         int deltaX = abs(x-to_x);
         int deltaY = abs(y-to_y);
-        if(deltaX+deltaY == 1 || deltaX*deltaY == 1)
+        if(pow(deltaX,2)+pow(deltaY,2) == 5)
         {
             return ChessPiece::validMove(to_x, to_y);
         }
@@ -213,14 +213,14 @@ public:
         vector<ChessMove> toReturn;
         toReturn.reserve(8);
         int moves[8][2] {
-            {x-1,y+1},
-            {x,y+1},
-            {x+1,y+1},
-            {x-1,y},
-            {x+1,y},
-            {x-1,y-1},
-            {x,y-1},
-            {x+1,y-1},
+            {x+1,y-2},
+            {x+2,y-1},
+            {x+2,y+1},
+            {x+1,y+2},
+            {x-1,y+2},
+            {x-2,y+1},
+            {x-2,y-1},
+            {x-1,y-2},
         };
         for (int i = 0; i < 8; i++)
         {
@@ -268,3 +268,5 @@ public:
 
 ChessBoard& operator>>(istream& is, ChessBoard& cb);
 ostream& operator<<(ostream& os, ChessBoard& cb);
+ostream& operator<<(ostream& os, ChessMove& cm);
+ostream& operator<<(ostream& os, const vector<ChessMove>& v);

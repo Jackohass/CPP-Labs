@@ -96,3 +96,19 @@ ostream& operator<<(ostream& os, ChessBoard& cb)
     }
     return os;
 }
+
+ostream& operator<<(ostream& os, ChessMove& cm)
+{
+    os << cm.piece->print(true) << ": (" << cm.from_x << "," << cm.from_y << ")->(" << cm.to_X << "," << cm.to_Y << ")";
+    return os;
+}
+
+ostream& operator<<(ostream& os, const vector<ChessMove>& v)
+{
+    os << "[\n";
+    for (int i = 0; i < v.size(); ++i) {
+        os << "\t" << v[i] << "\n";
+    }
+    os << "]";
+    return os;
+}
