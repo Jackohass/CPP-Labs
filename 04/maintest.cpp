@@ -92,14 +92,14 @@ int main()
     // s << "........" << endl;
     // s << "........" << endl;
     // s << "b......B";
-    // s << "Q......." << endl;
-    // s << ".......P" << endl;
-    // s << "........" << endl;
-    // s << "........" << endl;
-    // s << "........" << endl;
-    // s << "........" << endl;
-    // s << ".Q.....p" << endl;
-    // s << ".q......";
+    s << "Q......." << endl;
+    s << ".......P" << endl;
+    s << "........" << endl;
+    s << "........" << endl;
+    s << "........" << endl;
+    s << "........" << endl;
+    s << ".Q.....p" << endl;
+    s << ".q......";
     // s << "rnbqkbnr" << endl;
     // s << "pppppppp" << endl;
     // s << "........" << endl;
@@ -113,10 +113,10 @@ int main()
     // s >> chess;
     // cout << chess << endl;
 
-    // chess.move_piece(ChessMove{0,0,1,1,chess.getPiece(0,0)});
     // chess.move_piece(ChessMove{7,1,7,0,chess.getPiece(7,1)});
     // chess.move_piece(ChessMove{7,6,7,7,chess.getPiece(7,6)});
     // cout << chess << endl;
+    // cout << chess.getPiece(7,7)->print(false).compare("p") << endl;
 
     // vector<ChessMove> v = chess.capturingMoves(false);
     // cout << "capturingMoves: got " << v.size() << " moves" << endl;

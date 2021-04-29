@@ -6,26 +6,21 @@
 
 void doAI1Move(ChessBoard& cb, ChessMove move)
 {
-    cout << "doAI1Move0" << endl;
     if(cb.isPawnPromotion(move))
     {
-        cout << "doAI1Move promotion 0" << endl;
         char signs[4] = {'n','r','b','q'};
         cb.move_piecePromotion(move,signs[rand()%4]);
     }
     else
     {
-        cout << "doAI1Move no0" << endl;
         cb.move_piece(move);
     }
 }
 
 void doAI2Move(ChessBoard& cb, ChessMove move)
 {
-    cout << "doAI2Move0" << endl;
     if(cb.isPawnPromotion(move))
     {
-        cout << "doAI2Move pawn0" << endl;
         char signs[4] = {'n','r','b','q'};
         bool foundMove = false;
         for (int j = 0; j < 4 && !foundMove; j++)
@@ -47,10 +42,8 @@ void doAI2Move(ChessBoard& cb, ChessMove move)
     }
     else
     {
-        cout << "doAI2Move no0" << endl;
         cb.move_piece(move);
     }
-    cout << "doAI2Move done" << endl;
 }
 
 void AI1Play(ChessBoard& cb, bool isWhite)
@@ -58,21 +51,17 @@ void AI1Play(ChessBoard& cb, bool isWhite)
     vector<ChessMove> v = cb.capturingMoves(isWhite);
     if(v.size() != 0)
     {
-        cout << "AI1Play capture0" << endl;
         ChessMove move = v[rand()%v.size()];
         doAI1Move(cb, move);
-        cout << "AI1Play capture1" << endl;
     }
     else
     {
-        cout << "AI1Play noncapture0" << endl;
         v = cb.nonCapturingMoves(isWhite);
         if(v.size() != 0)
         {
             ChessMove move = v[rand()%v.size()];
             doAI1Move(cb, move);
         }
-        cout << "AI1Play noncapture1" << endl;
     }
 }
 
@@ -81,20 +70,17 @@ void AI2Play(ChessBoard& cb, bool isWhite)
     vector<ChessMove> v = cb.capturingMoves(isWhite);
     if(v.size() != 0)
     {
-        cout << "AI2Play capture0" << endl;
         bool foundMove = false;
         for (int i = 0; i < v.size() && !foundMove; i++)
         {
             ChessBoard newCb;
             cb.deepCopy(newCb);
-            cout << "AI2Play capture1" << endl;
             doAI2Move(newCb, v[i]);
             vector<ChessMove> newCbV = newCb.capturingMoves(!isWhite);
             for (int j = 0; j < newCbV.size(); j++)
             {
                 if(newCbV[j].to_x == v[i].to_x && newCbV[j].to_y == v[i].to_y)
                 {
-                    cout << "AI2Play capture2" << endl;
                     doAI2Move(cb, v[i]);
                     foundMove = true;
                     break;
@@ -104,28 +90,21 @@ void AI2Play(ChessBoard& cb, bool isWhite)
         }
         if(!foundMove)
         {
-            cout << "AI2Play capture3" << endl;
             doAI2Move(cb, v[rand()%v.size()]);
         }
-        cout << "AI2Play capture done" << endl;
     }
     else
     {
-        cout << "AI2Play noncapture0" << endl;
         v = cb.nonCapturingMoves(isWhite);
         bool foundMove = false;
         for (int i = 0; i < v.size() && !foundMove; i++)
         {
-            cout << "AI2Play noncapture1" << endl;
             ChessBoard newCb;
             cb.deepCopy(newCb);
             doAI2Move(newCb, v[i]);
-            cout << "AI2Play noncapture2" << endl;
             vector<ChessMove> newCbV = newCb.capturingMoves(!isWhite);
-            cout << "AI2Play noncapture3" << endl;
             for (int j = 0; j < newCbV.size(); j++)
             {
-                cout << "AI2Play noncapture4" << endl;
                 if(newCbV[j].to_x == v[i].to_x && newCbV[j].to_y == v[i].to_y)
                 {
                     doAI2Move(cb, v[i]);
@@ -142,9 +121,7 @@ void AI2Play(ChessBoard& cb, bool isWhite)
                 ChessMove move = v[rand()%v.size()];
                 doAI2Move(cb, move);
             }
-            cout << "AI2Play noncapture WOOPS" << endl;
         }
-        cout << "AI2Play noncapture done" << endl;
     }
 }
 
@@ -188,12 +165,10 @@ int main(int argc, char *argv[])
     {
         if(tick)
         {
-            cout << "true" << endl;
             AI1Play(chess, !whiteFirst);
         }
         else
         {
-            cout << "false" << endl;
             AI2Play(chess, whiteFirst);
         }
         cout << chess << endl;

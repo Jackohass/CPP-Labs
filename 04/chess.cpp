@@ -107,14 +107,8 @@ shared_ptr<ChessPiece> retPiece(char piece, int x, int y, ChessBoard* cb)
 bool ChessBoard::isPawnPromotion(ChessMove chessMove)
 {
     shared_ptr<ChessPiece> movedPiece = state(chessMove.from_x, chessMove.from_y);
-    cout << "isPawnPromotion0 " << movedPiece << endl;
-    cout << "(" << chessMove.from_x << "," << chessMove.from_y << ")->(" << chessMove.to_x << "," << chessMove.to_y << ")" << endl;
-    cout << "(" << chessMove.piece->x << "," << chessMove.piece->y << ")" << endl;
-    cout << chessMove.piece->print(false) << endl;
-    cout << "isPawnPromotion1\n" << *this << endl;
-    cout << movedPiece.get()->print(false) << endl;
-    return (!movedPiece.get()->print(false).compare("P") && chessMove.to_y == 7) || 
-        (!movedPiece.get()->print(false).compare("p") && chessMove.to_y == 0);
+    return (!movedPiece.get()->print(false).compare("p") && chessMove.to_y == 7) || 
+        (!movedPiece.get()->print(false).compare("P") && chessMove.to_y == 0);
 }
 void ChessBoard::move_piece(ChessMove chessMove)
 {
@@ -132,8 +126,8 @@ void ChessBoard::move_piece(ChessMove chessMove)
     state(chessMove.to_x, chessMove.to_y) = movedPiece;
     state(chessMove.from_x, chessMove.from_y) = nullptr;
     if(
-        (!movedPiece.get()->print(false).compare("P") && chessMove.to_y == 7) ||
-        (!movedPiece.get()->print(false).compare("p") && chessMove.to_y == 0)
+        (!movedPiece.get()->print(false).compare("p") && chessMove.to_y == 7) ||
+        (!movedPiece.get()->print(false).compare("P") && chessMove.to_y == 0)
     )
     {
         char sign;
@@ -156,12 +150,10 @@ void ChessBoard::move_piece(ChessMove chessMove)
         }
         if(movedPiece.get()->isWhite)
         {
-            cout << "AhW" << endl;
             sign = toupper(sign);
         }
         else
         {
-            cout << "AhB" << endl;
             sign = tolower(sign);
         }
         state(chessMove.to_x, chessMove.to_y) = nullptr;
@@ -184,8 +176,8 @@ void ChessBoard::move_piecePromotion(ChessMove chessMove, char sign)
     state(chessMove.to_x, chessMove.to_y) = movedPiece;
     state(chessMove.from_x, chessMove.from_y) = nullptr;
     if(
-        (!movedPiece.get()->print(false).compare("P") && chessMove.to_y == 7) ||
-        (!movedPiece.get()->print(false).compare("p") && chessMove.to_y == 0)
+        (!movedPiece.get()->print(false).compare("p") && chessMove.to_y == 7) ||
+        (!movedPiece.get()->print(false).compare("P") && chessMove.to_y == 0)
     )
     {
         switch(sign)
@@ -205,12 +197,10 @@ void ChessBoard::move_piecePromotion(ChessMove chessMove, char sign)
         }
         if(movedPiece.get()->isWhite)
         {
-            cout << "AhW" << endl;
             sign = toupper(sign);
         }
         else
         {
-            cout << "AhB" << endl;
             sign = tolower(sign);
         }
         state(chessMove.to_x, chessMove.to_y) = nullptr;
@@ -803,9 +793,7 @@ vector<ChessMove> Queen::capturingMoves()
 {
     const int num = 8;
     vector<ChessMove> partR = Rook::capturingMoves();
-    cout << "cmq: " << partR << endl;
     vector<ChessMove> partB = Bishop::capturingMoves();
-    cout << "cmq: " << partB << endl;
     vector<ChessMove> toReturn(partR.size() + partB.size());
     copy(partR.begin(), partR.end(), toReturn.begin());
     copy(partB.begin(), partB.end(), toReturn.begin()+partR.size());
@@ -815,9 +803,7 @@ vector<ChessMove> Queen::nonCapturingMoves()
 {
     const int num = 28;
     vector<ChessMove> partR = Rook::nonCapturingMoves();
-    cout << "ncmq: " << partR << endl;
     vector<ChessMove> partB = Bishop::nonCapturingMoves();
-    cout << "ncmq: " << partB << endl;
     vector<ChessMove> toReturn(partR.size() + partB.size());
     copy(partR.begin(), partR.end(), toReturn.begin());
     copy(partB.begin(), partB.end(), toReturn.begin()+partR.size());
