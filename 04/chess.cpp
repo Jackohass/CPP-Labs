@@ -249,7 +249,7 @@ int ChessBoard::getNumBlack() {return numBlack;}
 const ChessPiece* ChessBoard::getPiece(int x, int y) const {return state(x,y).get();}
 ChessPiece* ChessBoard::getPiece(int x, int y) {return state(x,y).get();}
 
-virtual int ChessPiece::validMove(int to_x, int to_y)
+int ChessPiece::validMove(int to_x, int to_y)
 {
     if(to_x < 0 || to_y < 0 || to_x > 7 || to_y > 7) return 0;
     const ChessPiece* piece = board->getPiece(to_x,to_y);
@@ -259,9 +259,9 @@ virtual int ChessPiece::validMove(int to_x, int to_y)
     }
     return 1;
 }
-virtual string ChessPiece::utfRepresentation() const {return ".";};     // may be implemented as string
-virtual char ChessPiece::latin1Representation() const {return '.';}
-virtual void ChessPiece::changePos(int toX, int toY)
+string ChessPiece::utfRepresentation() const {return ".";};     // may be implemented as string
+char ChessPiece::latin1Representation() const {return '.';}
+void ChessPiece::changePos(int toX, int toY)
 {
     x = toX;
     y = toY;
@@ -276,8 +276,8 @@ bool ChessPiece::nonCapturingMove(int to_x, int to_y)
 {
     return validMove(to_x, to_y) == 1;
 }
-virtual vector<ChessMove> ChessPiece::capturingMoves() {return vector<ChessMove>();}
-virtual vector<ChessMove> ChessPiece::nonCapturingMoves() {return vector<ChessMove>();}
+vector<ChessMove> ChessPiece::capturingMoves() {return vector<ChessMove>();}
+vector<ChessMove> ChessPiece::nonCapturingMoves() {return vector<ChessMove>();}
 string ChessPiece::print(bool utf) const
 {
     return utf ? utfRepresentation() : string(1, latin1Representation());
@@ -792,7 +792,7 @@ int Queen::validMove(int to_x, int to_y)
 string Queen::utfRepresentation() const {return (Rook::isWhite ? "♕" : "♛");}
 char Queen::latin1Representation() const {return (Rook::isWhite ? 'Q' : 'q');}
 Queen::Queen(int xPos, int yPos, bool isWhity, ChessBoard * boardy) : Bishop(xPos, yPos, isWhity, boardy), Rook(xPos, yPos, isWhity, boardy) {}
-virtual void Queen::changePos(int toX, int toY)
+void Queen::changePos(int toX, int toY)
 {
     Bishop::x = toX;
     Bishop::y = toY;

@@ -34,8 +34,8 @@ public:
     void move_piecePromotion(ChessMove chessMove, char sign);
     vector<ChessMove> capturingMoves(bool isWhite);
     vector<ChessMove> nonCapturingMoves(bool isWhite);
-    int getNumWhite() {return numWhite;}
-    int getNumBlack() {return numBlack;}
+    int getNumWhite();
+    int getNumBlack();
     bool isPawnPromotion(ChessMove chessMove);
     void deepCopy(ChessBoard& cb); 
 
@@ -43,7 +43,7 @@ public:
      * Returns nullptr
      * else returns the piece on that position
      */
-    const ChessPiece* getPiece(int x, int y);
+    const ChessPiece* getPiece(int x, int y) const;
     ChessPiece* getPiece(int x, int y);
 };
 
@@ -77,8 +77,8 @@ public:
      * Checks if this move is valid but does not capture a piece.
      */
     bool nonCapturingMove(int to_x, int to_y);
-    virtual vector<ChessMove> capturingMoves() {return vector<ChessMove>();}
-    virtual vector<ChessMove> nonCapturingMoves() {return vector<ChessMove>();}
+    virtual vector<ChessMove> capturingMoves();
+    virtual vector<ChessMove> nonCapturingMoves();
 
     string print(bool utf) const;
 
@@ -114,8 +114,8 @@ private:
 protected:
     int validMove(int to_x, int to_y);
     // may be implemented as string
-    string utfRepresentation();
-    char latin1Representation();
+    string utfRepresentation() const;
+    char latin1Representation() const;
 
 public:
     Knight(int xPos, int yPos, bool isWhity, ChessBoard * boardy);
