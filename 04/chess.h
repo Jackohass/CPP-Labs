@@ -26,11 +26,18 @@ friend ChessBoard& operator>>(istream& is, ChessBoard& cb);
 
 private:
     Matris<shared_ptr<ChessPiece>> state; // Matris from lab 4 Matrix
+    int numWhite;
+    int numBlack;
 
 public:
     void move_piece(ChessMove chessMove);
+    void move_piecePromotion(ChessMove chessMove, char sign);
     vector<ChessMove> capturingMoves(bool isWhite);
     vector<ChessMove> nonCapturingMoves(bool isWhite);
+    int getNumWhite() {return numWhite;}
+    int getNumBlack() {return numBlack;}
+    bool isPawnPromotion(ChessMove chessMove);
+    void deepCopy(ChessBoard& cb); 
 
     /**
      * Returns nullptr
@@ -66,6 +73,11 @@ protected:                               // protected will cause problems
     virtual char latin1Representation() const {return '.';}
 
 public:
+    virtual void changePos(int toX, int toY)
+    {
+        x = toX;
+        y = toY;
+    }
     // Constructor
     const bool isWhite;
     ChessPiece(int xPos, int yPos, bool isWhity, ChessBoard * boardy)
@@ -145,7 +157,8 @@ public:
     }
     vector<ChessMove> nonCapturingMoves()
     {
-        vector<ChessMove> toReturn(8);
+        vector<ChessMove> toReturn;
+        toReturn.reserve(8);
         int moves[8][2] {
             {x-1,y+1},
             {x,y+1},
@@ -289,46 +302,426 @@ public:
         toReturn.reserve(2);
         if(isWhite)
         {
-            if(nonCapturingMove(x, y-1)) toReturn.push_back(ChessMove{x,y,x,y-1,this});
-            if(y == 6 && nonCapturingMove(x, y-2)) toReturn.push_back(ChessMove{x,y,x,y-2,this});
+            if(nonCapturingMove(x, y-1))
+            {
+                toReturn.push_back(ChessMove{x,y,x,y-1,this});
+                if(y == 6 && nonCapturingMove(x, y-2)) toReturn.push_back(ChessMove{x,y,x,y-2,this});
+            } 
+            
         }
         else
         {
-            if(nonCapturingMove(x, y+1)) toReturn.push_back(ChessMove{x,y,x,y+1,this});
-            if(y == 1 && nonCapturingMove(x, y+2)) toReturn.push_back(ChessMove{x,y,x,y+2,this});
+            if(nonCapturingMove(x, y+1))
+            {
+                toReturn.push_back(ChessMove{x,y,x,y+1,this});
+                if(y == 1 && nonCapturingMove(x, y+2)) toReturn.push_back(ChessMove{x,y,x,y+2,this});
+            }
         }
         return toReturn;
     }
 };
 
-// class Bishop : ChessPiece
-// {
-// private:
-//     /* data */
-// public:
-//     Bishop(/* args */);
-//     ~Bishop();
-// };
+class Rook : public ChessPiece
+{
+private:
+    /* data */
 
-// class Rook : ChessPiece
-// {
-// private:
-//     /* data */
-// public:
-//     Rook(/* args */);
-//     ~Rook();
-// };
+protected:
+    int validMove(int to_x, int to_y)
+    {
+        if((to_x == x) || (to_y == y))
+        {
+            return ChessPiece::validMove(to_x, to_y);
+        }
+        return 0;
+    }
+    // may be implemented as string
+    string utfRepresentation() const {return (isWhite ? "♖" : "♜");}
+    char latin1Representation() const {return (isWhite ? 'R' : 'r');}
 
-// class Queen : ChessPiece
-// {
-// private:
-//     /* data */
-// public:
-//     Queen(/* args */);
-//     ~Queen();
-// };
+public:
+    Rook(int xPos, int yPos, bool isWhity, ChessBoard * boardy) : ChessPiece(xPos, yPos, isWhity, boardy) {}
+
+    vector<ChessMove> capturingMoves()
+    {
+        const int num = 4;
+        vector<ChessMove> toReturn;
+        toReturn.reserve(num);
+        int toY = y+1;
+        while (toY < 8)
+        {
+            switch(validMove(x, toY))
+            {
+                case 0:
+                toY = 8;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,x,toY,this});
+                toY = 8;
+                break;
+            }
+            toY++;
+        }
+        toY = y-1;
+        while (toY > -1)
+        {
+            switch(validMove(x, toY))
+            {
+                case 0:
+                toY = -1;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,x,toY,this});
+                toY = -1;
+                break;
+            }
+            toY--;
+        }
+        int toX = x+1;
+        while (toX < 8)
+        {
+            switch(validMove(toX, y))
+            {
+                case 0:
+                toX = 8;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,toX,y,this});
+                toX = 8;
+                break;
+            }
+            toX++;
+        }
+        toX = x-1;
+        while (toX > -1)
+        {
+            switch(validMove(toX, y))
+            {
+                case 0:
+                toX = -1;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,toX,y,this});
+                toX = -1;
+                break;
+            }
+            toX--;
+        }
+        return toReturn;
+    }
+    vector<ChessMove> nonCapturingMoves()
+    {
+        const int num = 14;
+        vector<ChessMove> toReturn;
+        toReturn.reserve(num);
+        int toY = y+1;
+        while (toY < 8)
+        {
+            switch(validMove(x, toY))
+            {
+                case 0:
+                toY = 8;
+                break;
+                case 2:
+                toY = 8;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,x,toY,this});
+                break;
+            }
+            toY++;
+        }
+        toY = y-1;
+        while (toY > -1)
+        {
+            switch(validMove(x, toY))
+            {
+                case 0:
+                toY = -1;
+                break;
+                case 2:
+                toY = -1;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,x,toY,this});
+                break;
+            }
+            toY--;
+        }
+        int toX = x+1;
+        while (toX < 8)
+        {
+            switch(validMove(toX, y))
+            {
+                case 0:
+                toX = 8;
+                break;
+                case 2:
+                toX = 8;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,toX,y,this});
+                break;
+            }
+            toX++;
+        }
+        toX = x-1;
+        while (toX > -1)
+        {
+            switch(validMove(toX, y))
+            {
+                case 0:
+                toX = -1;
+                break;
+                case 2:
+                toX = -1;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,toX,y,this});
+                break;
+            }
+            toX--;
+        }
+        return toReturn;
+    }
+};
+
+class Bishop : public ChessPiece
+{
+private:
+    /* data */
+
+protected:
+    int validMove(int to_x, int to_y)
+    {
+        int deltaX = abs(x-to_x);
+        int deltaY = abs(y-to_y);
+        if(deltaX == deltaY)
+        {
+            return ChessPiece::validMove(to_x, to_y);
+        }
+        return 0;
+    }
+    // may be implemented as string
+    string utfRepresentation() const {return (isWhite ? "♗" : "♝");}
+    char latin1Representation() const {return (isWhite ? 'B' : 'b');}
+
+public:
+    Bishop(int xPos, int yPos, bool isWhity, ChessBoard * boardy) : ChessPiece(xPos, yPos, isWhity, boardy) {}
+
+    vector<ChessMove> capturingMoves()
+    {
+        const int num = 4;
+        vector<ChessMove> toReturn;
+        toReturn.reserve(num);
+        int toY = y+1;
+        int toX = x+1;
+        while (toY < 8 && toX < 8)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = 8;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                toY = 8;
+                break;
+            }
+            toX++;
+            toY++;
+        }
+        toY = y+1;
+        toX = x-1;
+        while (toY < 8 && toX > -1)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = 8;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                toY = 8;
+                break;
+            }
+            toX--;
+            toY++;
+        }
+        toY = y-1;
+        toX = x+1;
+        while (toY > -1 && toX < 8)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = -1;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                toY = -1;
+                break;
+            }
+            toX++;
+            toY--;
+        }
+        toY = y-1;
+        toX = x-1;
+        while (toY > -1 && toX > -1)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = -1;
+                break;
+                case 2:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                toY = -1;
+                break;
+            }
+            toX--;
+            toY--;
+        }
+        return toReturn;
+    }
+    vector<ChessMove> nonCapturingMoves()
+    {
+        const int num = 14;
+        vector<ChessMove> toReturn;
+        toReturn.reserve(num);
+        int toY = y+1;
+        int toX = x+1;
+        while (toY < 8 && toX < 8)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = 8;
+                break;
+                case 2:
+                toY = 8;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                break;
+            }
+            toX++;
+            toY++;
+        }
+        toY = y+1;
+        toX = x-1;
+        while (toY < 8 && toX > -1)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = 8;
+                break;
+                case 2:
+                toY = 8;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                break;
+            }
+            toX--;
+            toY++;
+        }
+        toY = y-1;
+        toX = x+1;
+        while (toY > -1 && toX < 8)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = -1;
+                break;
+                case 2:
+                toY = -1;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                break;
+            }
+            toX++;
+            toY--;
+        }
+        toY = y-1;
+        toX = x-1;
+        while (toY > -1 && toX > -1)
+        {
+            switch(validMove(toX, toY))
+            {
+                case 0:
+                toY = -1;
+                break;
+                case 2:
+                toY = -1;
+                break;
+                case 1:
+                toReturn.push_back(ChessMove{x,y,toX,toY,this});
+                break;
+            }
+            toX--;
+            toY--;
+        }
+        return toReturn;
+    }
+};
+ostream& operator<<(ostream& os, const vector<ChessMove>& v);
+class Queen : public Rook, public Bishop
+{
+private:
+    /* data */
+
+protected:
+    int validMove(int to_x, int to_y)
+    {
+        return Rook::validMove(to_x, to_y) + Bishop::validMove(to_x, to_y);
+    }
+    // may be implemented as string
+    string utfRepresentation() const {return (Rook::isWhite ? "♕" : "♛");}
+    char latin1Representation() const {return (Rook::isWhite ? 'Q' : 'q');}
+
+public:
+    Queen(int xPos, int yPos, bool isWhity, ChessBoard * boardy) : Bishop(xPos, yPos, isWhity, boardy), Rook(xPos, yPos, isWhity, boardy) {}
+
+    virtual void changePos(int toX, int toY)
+    {
+        Bishop::x = toX;
+        Bishop::y = toY;
+        Rook::x = toX;
+        Rook::y = toY;
+    }
+
+    vector<ChessMove> capturingMoves()
+    {
+        const int num = 8;
+        vector<ChessMove> partR = Rook::capturingMoves();
+        cout << "cmq: " << partR << endl;
+        vector<ChessMove> partB = Bishop::capturingMoves();
+        cout << "cmq: " << partB << endl;
+        vector<ChessMove> toReturn(partR.size() + partB.size());
+        copy(partR.begin(), partR.end(), toReturn.begin());
+        copy(partB.begin(), partB.end(), toReturn.begin()+partR.size());
+        return toReturn;
+    }
+    vector<ChessMove> nonCapturingMoves()
+    {
+        const int num = 28;
+        vector<ChessMove> partR = Rook::nonCapturingMoves();
+        cout << "ncmq: " << partR << endl;
+        vector<ChessMove> partB = Bishop::nonCapturingMoves();
+        cout << "ncmq: " << partB << endl;
+        vector<ChessMove> toReturn(partR.size() + partB.size());
+        copy(partR.begin(), partR.end(), toReturn.begin());
+        copy(partB.begin(), partB.end(), toReturn.begin()+partR.size());
+        
+        return toReturn;
+    }
+};
+
 
 ChessBoard& operator>>(istream& is, ChessBoard& cb);
 ostream& operator<<(ostream& os, ChessBoard& cb);
 ostream& operator<<(ostream& os, ChessMove& cm);
-ostream& operator<<(ostream& os, const vector<ChessMove>& v);
