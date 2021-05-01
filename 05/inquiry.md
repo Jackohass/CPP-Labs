@@ -26,7 +26,7 @@ Yes we are able to.
 What it means is that we can't change the value of `parameter` inside of the function, so it will *const*antly be 17 inside of the function.
 
 #### How do you check if two objects are equal if they only have operator< and not operator==?
-If they follow the same rules as numbers, then I believe you can check it in two conditions:
+If they follow the same rules as numbers and the operator does indeed compare less than, then I believe you can check it in two conditions:
 
 `!(a < b) && !(b < a)`
 
@@ -41,9 +41,9 @@ That means that `!(b < a)` compare the same thing as `a <= b`.
 #### Write down data from your test runs
 ##### Tests according to instructions:
 * Average height: 31.00
-* Maximum height: 31
+* Highest maximum height: 31
 * Average minimum height: 1.00
-* Minimum height: 1
+* Lowest minimum height: 1
 * Average difference between minimum and maximum height: 30.00
 * Greatest difference between minimum and maximum height: 30
 * Greatest difference between minimum and maximum height in the same tree: 30
@@ -52,9 +52,9 @@ That means that `!(b < a)` compare the same thing as `a <= b`.
 
 ##### Improved tests:
 * Average height: 29.81
-* Maximum height: 40
+* Highest maximum height: 40
 * Average minimum height: 4.07
-* Minimum height: 1
+* Lowest minimum height: 1
 * Average difference between minimum and maximum height: 25.74
 * Greatest difference between minimum and maximum height: 39
 * Greatest difference between minimum and maximum height in the same tree: 36

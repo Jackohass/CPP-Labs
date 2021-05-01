@@ -56,9 +56,9 @@ void instructionTest()
         diffSum += abs(results[i].max-results[i].min);
     }
     printf("Average height: %.2f\n", (((double)maxSum)/results.size()));
-    printf("Maximum height: %d\n", max);
+    printf("Highest maximum height: %d\n", max);
     printf("Average minimum height: %.2f\n", (((double)minSum)/results.size()));
-    printf("Minimum height: %d\n", min);
+    printf("Lowest minimum height: %d\n", min);
     printf("Average difference between minimum and maximum height: %.2f\n", (((double)diffSum)/results.size()));
     printf("Greatest difference between minimum and maximum height: %d\n", abs(max-min));
     printf("Greatest difference between minimum and maximum height in the same tree: %d\n", abs(maxDiff));
@@ -114,9 +114,9 @@ int main()
         diffSum += abs(results[i].max-results[i].min);
     }
     printf("Average height: %.2f\n", (((double)maxSum)/results.size()));
-    printf("Maximum height: %d\n", max);
+    printf("Highest maximum height: %d\n", max);
     printf("Average minimum height: %.2f\n", (((double)minSum)/results.size()));
-    printf("Minimum height: %d\n", min);
+    printf("Lowest minimum height: %d\n", min);
     printf("Average difference between minimum and maximum height: %.2f\n", (((double)diffSum)/results.size()));
     printf("Greatest difference between minimum and maximum height: %d\n", abs(max-min));
     printf("Greatest difference between minimum and maximum height in the same tree: %d\n", abs(maxDiff));
