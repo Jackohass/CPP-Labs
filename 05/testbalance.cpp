@@ -16,7 +16,7 @@ struct minMax
 
 void instructionTest()
 {
-    vector<int> numbers(900);
+    vector<int> numbers(9000);
     vector<minMax> results(800);
     iota(numbers.begin(), numbers.end(), 1);
     unsigned seed = 990701;
@@ -74,7 +74,7 @@ int main()
 
 
     printf("Improved tests: \n");
-    vector<int> numbers(900);
+    vector<int> numbers(9000);
     vector<minMax> results(800);
     iota(numbers.begin(), numbers.end(), 1);
     unsigned seed = 990701;
