@@ -404,6 +404,251 @@ public:
         delete_tree(data);
     }
 
+    void testSize0( void )
+    {
+        Node* data = nullptr;
+        TS_ASSERT(size(data) == 0);
+    }
+    void testSize1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+
+        TS_ASSERT(size(data) == 1);
+        delete_tree(data);
+    }
+    void testSizeRoot( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        TS_ASSERT(size(data) == 9);
+        delete_tree(data);
+    }
+    void testSizeMiddle( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        TS_ASSERT(size(data->right) == 5);
+        delete_tree(data);
+    }
+    void testSizeLeaf( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(size(data->left->right) == 1);
+        delete_tree(data);
+    }
+
+    void testBalance0( void )
+    {
+        Node* data = nullptr;
+        TS_ASSERT(is_balanced(data) == true);
+    }
+    void testBalance1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+
+        TS_ASSERT(is_balanced(data) == true);
+        delete_tree(data);
+    }
+    void testBalanceRootUnbalanced( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        
+        TS_ASSERT(is_balanced(data) == false);
+        delete_tree(data);
+    }
+    void testBalanceMiddleUnbalanced( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(is_balanced(data->right) == false);
+        delete_tree(data);
+    }
+    void testBalanceLeafUnbalanced( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(is_balanced(data->left->right) == true);
+        delete_tree(data);
+    }
+    void testBalanceRootBalanced( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+        
+        TS_ASSERT(is_balanced(data) == true);
+        delete_tree(data);
+    }
+    void testBalanceMiddleBalanced( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+
+        TS_ASSERT(is_balanced(data->right) == true);
+        delete_tree(data);
+    }
+    void testBalanceLeafBalanced( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72); 
+
+        TS_ASSERT(is_balanced(data->left->right) == true);
+        delete_tree(data);
+    }
+
+    void testRemove0( void )
+    {
+        Node* data = nullptr;
+        TS_ASSERT_THROWS(remove(data, 0), out_of_range);
+    }
+    void testRemove1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+
+        remove(data, 0);
+
+        TS_ASSERT(data == nullptr);
+    }
+    void testRemoveRoot( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        
+        remove(data, 0);
+        
+        TS_ASSERT(size(data) == 8);
+        delete_tree(data);
+    }
+    void testRemoveMiddle( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        
+        remove(data, 8);
+        
+        TS_ASSERT(size(data) == 8);
+        delete_tree(data);
+    }
+    void testRemoveLeaf( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        
+        remove(data, -2);
+        TS_ASSERT(size(data) == 8);
+        delete_tree(data);
+    }
+    void testRemoveNothing( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+        TS_ASSERT_THROWS(remove(data, 32), out_of_range);
+        delete_tree(data);
+    }
+    
 private:
     #include<string>
     void printTree(Node* p)
