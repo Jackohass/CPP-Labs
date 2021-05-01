@@ -8,5 +8,5 @@ all: testtree.h bintree.o testbalance.cpp
 		g++ testbalance.cpp -std=c++11 -g -Wall -pedantic -o testbalance
 		
 tests: testtree testbalance
-		./testtree
-		./testbalance
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-testtree.txt ./testtree
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-testbalance.txt ./testbalance

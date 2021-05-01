@@ -34,6 +34,7 @@ void delete_tree(Node * & p)
     delete_tree(p->left);
     delete_tree(p->right);
     delete p;
+    p = nullptr;
 }
 
 unsigned int max_height(Node * p)

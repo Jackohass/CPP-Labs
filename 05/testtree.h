@@ -7,6 +7,72 @@ using namespace std;
 class MyTestSuite : public CxxTest::TestSuite 
 {
 public:
+    void testDelete0( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        delete_tree(data);
+
+        TS_ASSERT(data == nullptr);
+    }
+    void testDelete1( void )
+    {
+        Node* data = nullptr;
+        delete_tree(data);
+
+        TS_ASSERT(data == nullptr);
+    }
+    void testDeleteRoot( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+        
+        delete_tree(data);
+
+        TS_ASSERT(data == nullptr);
+    }
+    void testDeleteMiddle( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+
+        delete_tree(data->right);
+
+        TS_ASSERT(data != nullptr);
+        TS_ASSERT(data->right == nullptr);
+        delete_tree(data);
+    }
+    void testDeleteLeaf( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+
+        delete_tree(data->right->left);
+
+        TS_ASSERT(data != nullptr);
+        TS_ASSERT(data->right != nullptr);
+        TS_ASSERT(data->right->left == nullptr);
+        delete_tree(data);
+    }
+
     void testInsert0( void )
     {
         Node* data = nullptr;
@@ -16,6 +82,7 @@ public:
         TS_ASSERT(data->data == 22);
         TS_ASSERT(data->left == nullptr);
         TS_ASSERT(data->right == nullptr);
+        delete_tree(data);
     }
     void testInsert1( void )
     {
@@ -29,6 +96,7 @@ public:
         TS_ASSERT(temp->data == 22);
         TS_ASSERT(temp->left == nullptr);
         TS_ASSERT(temp->right == nullptr);
+        delete_tree(data);
     }
     void testInsert1Overwrite( void )
     {
@@ -43,6 +111,7 @@ public:
         TS_ASSERT(temp->data == 32);
         TS_ASSERT(temp->left == nullptr);
         TS_ASSERT(temp->right == nullptr);
+        delete_tree(data);
     }
     void testInsertMore( void )
     {
@@ -61,12 +130,21 @@ public:
         TS_ASSERT(temp->data == 22);
         TS_ASSERT(temp->left == nullptr);
         TS_ASSERT(temp->right == nullptr);
+        delete_tree(data);
     }
 
     void testFind0( void )
     {
         Node* data = nullptr;
         TS_ASSERT_THROWS(find(data, 0), out_of_range);
+    }
+    void testFind1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+
+        TS_ASSERT(find(data,0) == 12);
+        delete_tree(data);
     }
     void testFindRoot( void )
     {
@@ -80,6 +158,7 @@ public:
         insert(data,-3,72);
 
         TS_ASSERT(find(data,0) == 12);
+        delete_tree(data);
     }
     void testFindMiddle( void )
     {
@@ -93,6 +172,7 @@ public:
         insert(data,-3,72);
 
         TS_ASSERT(find(data,2) == 22);
+        delete_tree(data);
     }
     void testFindLeaf( void )
     {
@@ -106,6 +186,7 @@ public:
         insert(data,-3,72);
 
         TS_ASSERT(find(data,1) == 42);
+        delete_tree(data);
     }
     void testFindNothing( void )
     {
@@ -119,12 +200,23 @@ public:
         insert(data,-3,72);
 
         TS_ASSERT_THROWS(find(data, 32), out_of_range);
+        delete_tree(data);
     }
 
     void testEdit0( void )
     {
         Node* data = nullptr;
         TS_ASSERT_THROWS(edit(data, 0), out_of_range);
+    }
+    void testEdit1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+
+        edit(data,0) = 2;
+
+        TS_ASSERT(data->data == 2);
+        delete_tree(data);
     }
     void testEditRoot( void )
     {
@@ -140,6 +232,7 @@ public:
         edit(data,0) = 2;
 
         TS_ASSERT(data->data == 2);
+        delete_tree(data);
     }
     void testEditMiddle( void )
     {
@@ -155,6 +248,7 @@ public:
         edit(data,2) = 33;
 
         TS_ASSERT(find(data,2) == 33);
+        delete_tree(data);
     }
     void testEditLeaf( void )
     {
@@ -170,6 +264,7 @@ public:
         edit(data,1) = 55;
 
         TS_ASSERT(find(data,1) == 55);
+        delete_tree(data);
     }
     void testEditNothing( void )
     {
@@ -183,6 +278,7 @@ public:
         insert(data,-3,72);
 
         TS_ASSERT_THROWS(edit(data, 32), out_of_range);
+        delete_tree(data);
     }
 
 private:
