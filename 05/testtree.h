@@ -1,6 +1,7 @@
 #include<cxxtest/TestSuite.h>
 #include"bintree.h"
 #include<stdexcept>
+#include<iostream>
 
 using namespace std;
 
@@ -281,6 +282,136 @@ public:
         delete_tree(data);
     }
 
-private:
+    void testMaxHeight0( void )
+    {
+        Node* data = nullptr;
+        TS_ASSERT(max_height(data) == -1);
+    }
+    void testMaxHeight1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
 
+        TS_ASSERT(max_height(data) == 0);
+        delete_tree(data);
+    }
+    void testMaxHeightRoot( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(max_height(data) == 4);
+        delete_tree(data);
+    }
+    void testMaxHeightMiddle( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(max_height(data->right) == 3);
+        delete_tree(data);
+    }
+    void testMaxHeightLeaf( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(max_height(data->left->right) == 0);
+        delete_tree(data);
+    }
+
+    void testMinHeight0( void )
+    {
+        Node* data = nullptr;
+        TS_ASSERT(min_height(data) == -1);
+    }
+    void testMinHeight1( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+
+        TS_ASSERT(min_height(data) == 0);
+        delete_tree(data);
+    }
+    void testMinHeightRoot( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        TS_ASSERT(min_height(data) == 1);
+        delete_tree(data);
+    }
+    void testMinHeightMiddle( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+        TS_ASSERT(min_height(data->right) == 0);
+        delete_tree(data);
+    }
+    void testMinHeightLeaf( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,4,62);
+        insert(data,2,62);
+        insert(data,5,62);
+        insert(data,1,62);
+
+        TS_ASSERT(min_height(data->left->right) == 0);
+        delete_tree(data);
+    }
+
+private:
+    #include<string>
+    void printTree(Node* p)
+    {
+        if(p == nullptr) return;
+        cout << p->key << "->" << (p->left == nullptr ? "nullptr" : to_string(p->left->key)) << endl;
+        cout << p->key << "->" <<(p->right == nullptr ? "nullptr" : to_string(p->right->key)) << endl;
+        printTree(p->left);
+        printTree(p->right);
+    }
 };

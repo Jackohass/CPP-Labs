@@ -1,5 +1,6 @@
 #include"bintree.h"
 #include<stdexcept>
+#include<algorithm>
 
 using namespace std;
 
@@ -36,14 +37,25 @@ void delete_tree(Node * & p)
     delete p;
     p = nullptr;
 }
-
+unsigned int recMax_height(Node * p)
+{
+    if(p == nullptr) return 0;
+    return max(recMax_height(p->left),recMax_height(p->right))+1;
+}
 unsigned int max_height(Node * p)
 {
-    
+    if(p == nullptr) return -1;
+    return max(recMax_height(p->left),recMax_height(p->right));
+}
+unsigned int recMin_height(Node * p)
+{
+    if(p == nullptr) return 0;
+    return min(recMin_height(p->left),recMin_height(p->right))+1;
 }
 unsigned int min_height(Node * p)
 {
-    
+    if(p == nullptr) return -1;
+    return min(recMin_height(p->left),recMin_height(p->right));
 }
 unsigned int size(Node * p)
 {
