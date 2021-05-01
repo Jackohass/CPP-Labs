@@ -105,7 +105,7 @@ public:
         insert(data,-1,62);
         insert(data,-3,72);
 
-        TS_ASSERT(find(data,3) == 52);
+        TS_ASSERT(find(data,1) == 42);
     }
     void testFindNothing( void )
     {
@@ -119,6 +119,70 @@ public:
         insert(data,-3,72);
 
         TS_ASSERT_THROWS(find(data, 32), out_of_range);
+    }
+
+    void testEdit0( void )
+    {
+        Node* data = nullptr;
+        TS_ASSERT_THROWS(edit(data, 0), out_of_range);
+    }
+    void testEditRoot( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+        
+        edit(data,0) = 2;
+
+        TS_ASSERT(data->data == 2);
+    }
+    void testEditMiddle( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+
+        edit(data,2) = 33;
+
+        TS_ASSERT(find(data,2) == 33);
+    }
+    void testEditLeaf( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+
+        edit(data,1) = 55;
+
+        TS_ASSERT(find(data,1) == 55);
+    }
+    void testEditNothing( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,2,22);
+        insert(data,-2,32);
+        insert(data,1,42);
+        insert(data,3,52);
+        insert(data,-1,62);
+        insert(data,-3,72);
+
+        TS_ASSERT_THROWS(edit(data, 32), out_of_range);
     }
 
 private:

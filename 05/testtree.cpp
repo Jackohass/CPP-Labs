@@ -82,5 +82,35 @@ public:
  void runTest() { suite_MyTestSuite.testFindNothing(); }
 } testDescription_suite_MyTestSuite_testFindNothing;
 
+static class TestDescription_suite_MyTestSuite_testEdit0 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testEdit0() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 124, "testEdit0" ) {}
+ void runTest() { suite_MyTestSuite.testEdit0(); }
+} testDescription_suite_MyTestSuite_testEdit0;
+
+static class TestDescription_suite_MyTestSuite_testEditRoot : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testEditRoot() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 129, "testEditRoot" ) {}
+ void runTest() { suite_MyTestSuite.testEditRoot(); }
+} testDescription_suite_MyTestSuite_testEditRoot;
+
+static class TestDescription_suite_MyTestSuite_testEditMiddle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testEditMiddle() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 144, "testEditMiddle" ) {}
+ void runTest() { suite_MyTestSuite.testEditMiddle(); }
+} testDescription_suite_MyTestSuite_testEditMiddle;
+
+static class TestDescription_suite_MyTestSuite_testEditLeaf : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testEditLeaf() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 159, "testEditLeaf" ) {}
+ void runTest() { suite_MyTestSuite.testEditLeaf(); }
+} testDescription_suite_MyTestSuite_testEditLeaf;
+
+static class TestDescription_suite_MyTestSuite_testEditNothing : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testEditNothing() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 174, "testEditNothing" ) {}
+ void runTest() { suite_MyTestSuite.testEditNothing(); }
+} testDescription_suite_MyTestSuite_testEditNothing;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";
