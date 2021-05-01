@@ -60,3 +60,8 @@ That means that `!(b < a)` compare the same thing as `a <= b`.
 * Greatest difference between minimum and maximum height in the same tree: 36
 * Lowest difference between minimum and maximum height: 19
 * Lowest difference between minimum and maximum height in the same tree: 20
+
+#### Induce one or more bugs in your code and run your tests. Correct the bug(s) afterwards.
+In the `size` function I removed the recursive `+1` so it would return the wrong size.
+This made me fail all size tests where the number of nodes were >1, which makes sense.
+This also made me fail some of the remove tests, as I use the size function to also check if a node is removed properly.

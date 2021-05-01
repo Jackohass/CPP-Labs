@@ -132,7 +132,7 @@ unsigned int min_height(Node * p)
 unsigned int size(Node * p)
 {
     if(p == nullptr) return 0;
-    return size(p->left) + size(p->right)+1;
+    return size(p->left) + size(p->right) + 1;
 }
 bool recBalance(Node * p, unsigned int& height) {
     if (p == NULL) {
