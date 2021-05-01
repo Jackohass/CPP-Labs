@@ -384,7 +384,7 @@ public:
         insert(data,2,62);
         insert(data,5,62);
         insert(data,1,62);
-        TS_ASSERT(min_height(data->right) == 0);
+        TS_ASSERT(min_height(data->right) == 2);
         delete_tree(data);
     }
     void testMinHeightLeaf( void )
@@ -596,7 +596,7 @@ public:
         insert(data,1,62);
         
         remove(data, 0);
-        
+
         TS_ASSERT(size(data) == 8);
         delete_tree(data);
     }

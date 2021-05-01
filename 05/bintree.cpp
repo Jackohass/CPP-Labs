@@ -123,7 +123,11 @@ unsigned int recMin_height(Node * p)
 unsigned int min_height(Node * p)
 {
     if(p == nullptr) return -1;
-    return min(recMin_height(p->left), recMin_height(p->right));
+    unsigned int lMin = recMin_height(p->left);
+    unsigned int rMin = recMin_height(p->right);
+    if(lMin == 0) return rMin;
+    if(rMin == 0) return lMin;
+    return min(lMin, rMin);
 }
 unsigned int size(Node * p)
 {
