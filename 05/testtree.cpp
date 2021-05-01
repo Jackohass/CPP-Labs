@@ -39,5 +39,17 @@ public:
  void runTest() { suite_MyTestSuite.testInsert1(); }
 } testDescription_suite_MyTestSuite_testInsert1;
 
+static class TestDescription_suite_MyTestSuite_testInsert1Overwrite : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testInsert1Overwrite() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 31, "testInsert1Overwrite" ) {}
+ void runTest() { suite_MyTestSuite.testInsert1Overwrite(); }
+} testDescription_suite_MyTestSuite_testInsert1Overwrite;
+
+static class TestDescription_suite_MyTestSuite_testInsertMore : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testInsertMore() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 45, "testInsertMore" ) {}
+ void runTest() { suite_MyTestSuite.testInsertMore(); }
+} testDescription_suite_MyTestSuite_testInsertMore;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

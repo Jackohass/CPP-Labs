@@ -28,14 +28,38 @@ public:
         TS_ASSERT(temp->left == nullptr);
         TS_ASSERT(temp->right == nullptr);
     }
-    // void testInsertMore( void )
-    // {
-    //     int[]
-    //     Node* data = ;
+    void testInsert1Overwrite( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,22);
+        insert(data,1,22);
+        insert(data,1,32);
         
-    //     TS_ASSERT(data.real() == 0);
-    //     TS_ASSERT(data.imag() == 0);
-    // }
+        Node* temp = data->right;
+        TS_ASSERT(data->right != nullptr);
+        TS_ASSERT(temp->key == 1);
+        TS_ASSERT(temp->data == 32);
+        TS_ASSERT(temp->left == nullptr);
+        TS_ASSERT(temp->right == nullptr);
+    }
+    void testInsertMore( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,22);
+        insert(data,2,22);
+        insert(data,-2,22);
+        insert(data,1,22);
+        insert(data,3,22);
+        insert(data,-1,22);
+        insert(data,-3,22);
+        
+        Node* temp = data->right->left;
+        TS_ASSERT(data->right != nullptr);
+        TS_ASSERT(temp->key == 1);
+        TS_ASSERT(temp->data == 22);
+        TS_ASSERT(temp->left == nullptr);
+        TS_ASSERT(temp->right == nullptr);
+    }
 
 private:
 
