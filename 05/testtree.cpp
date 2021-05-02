@@ -316,15 +316,21 @@ public:
  void runTest() { suite_MyTestSuite.testRemoveMiddle(); }
 } testDescription_suite_MyTestSuite_testRemoveMiddle;
 
+static class TestDescription_suite_MyTestSuite_testRemoveMiddleV2 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testRemoveMiddleV2() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 621, "testRemoveMiddleV2" ) {}
+ void runTest() { suite_MyTestSuite.testRemoveMiddleV2(); }
+} testDescription_suite_MyTestSuite_testRemoveMiddleV2;
+
 static class TestDescription_suite_MyTestSuite_testRemoveLeaf : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testRemoveLeaf() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 621, "testRemoveLeaf" ) {}
+ TestDescription_suite_MyTestSuite_testRemoveLeaf() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 640, "testRemoveLeaf" ) {}
  void runTest() { suite_MyTestSuite.testRemoveLeaf(); }
 } testDescription_suite_MyTestSuite_testRemoveLeaf;
 
 static class TestDescription_suite_MyTestSuite_testRemoveNothing : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testRemoveNothing() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 638, "testRemoveNothing" ) {}
+ TestDescription_suite_MyTestSuite_testRemoveNothing() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 657, "testRemoveNothing" ) {}
  void runTest() { suite_MyTestSuite.testRemoveNothing(); }
 } testDescription_suite_MyTestSuite_testRemoveNothing;
 

@@ -37,51 +37,51 @@ Node * & getNode(Node * & p, Node * & prev, const int & key)
 void remove(Node * & p, const int & key)
 {
     Node * parent;
-    Node * & removeNode = getNode(p, parent, key);
-    if(removeNode->left != nullptr && removeNode->right != nullptr)
+    Node * & affectedNode = getNode(p, parent, key);
+    if(affectedNode->left != nullptr && affectedNode->right != nullptr)
     {
-        Node * moveNode = getMaxNode(removeNode->right);  
+        Node * moveNode = getMaxNode(affectedNode->right);  
         int tempData = moveNode->data;
         int tempKey = moveNode->key;
-        remove(removeNode, moveNode->key);
-        removeNode->data = tempData;
-        removeNode->key = tempKey;
+        remove(affectedNode, moveNode->key);
+        affectedNode->data = tempData;
+        affectedNode->key = tempKey;
     }
-    else if(removeNode->left != nullptr)
+    else if(affectedNode->left != nullptr)
     {
-        if(parent->left == removeNode)
+        if(parent->left == affectedNode)
         {
-            Node * temp = removeNode->left;
-            removeNode->left = nullptr;
-            delete_tree(removeNode->left);
+            Node * temp = affectedNode->left;
+            affectedNode->left = nullptr;
+            delete_tree(affectedNode);
             parent->left = temp;
         }
         else
         {
-            Node * temp = removeNode->left;
-            removeNode->left = nullptr;
-            delete_tree(removeNode);
+            Node * temp = affectedNode->left;
+            affectedNode->left = nullptr;
+            delete_tree(affectedNode);
             parent->right = temp;
         }
     }
-    else if(removeNode->right != nullptr)
+    else if(affectedNode->right != nullptr)
     {
-        if(parent->left == removeNode)
+        if(parent->left == affectedNode)
         {
-            Node * temp = removeNode->right;
-            removeNode->left = nullptr;
-            delete_tree(removeNode);
+            Node * temp = affectedNode->right;
+            affectedNode->right = nullptr;
+            delete_tree(affectedNode);
             parent->left = temp;
         }
         else
         {
-            Node * temp = removeNode->right;
-            removeNode->left = nullptr;
-            delete_tree(removeNode);
+            Node * temp = affectedNode->right;
+            affectedNode->right = nullptr;
+            delete_tree(affectedNode);
             parent->right = temp;
         }
     }
-    else delete_tree(removeNode);
+    else delete_tree(affectedNode);
 }
 const double & find(Node * p, const int & to_be_found)
 {

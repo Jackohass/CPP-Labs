@@ -618,6 +618,24 @@ public:
         TS_ASSERT(size(data) == 8);
         delete_tree(data);
     }
+    void testRemoveMiddleV2( void )
+    {
+        Node* data = nullptr;
+        insert(data,0,12);
+        insert(data,-4,22);
+        insert(data,-2,32);
+        insert(data,-5,42);
+        insert(data,8,52);
+        insert(data,16,62);
+        insert(data,12,62);
+        insert(data,18,62);
+        insert(data,10,62);
+
+        remove(data, 8);
+
+        TS_ASSERT(size(data) == 8);
+        delete_tree(data);
+    }
     void testRemoveLeaf( void )
     {
         Node* data = nullptr;
