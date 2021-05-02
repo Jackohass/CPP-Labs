@@ -1,7 +1,7 @@
 # Inquiry
 ## Answers
 #### What did you learn in this assignement?
-In this assignement I learnt about abou lambda functions, memory handling, weak_ptr & unqiue_ptr.
+In this assignment I learnt about about lambda functions, memory handling, weak_ptr & unqiue_ptr.
 I also learnt about concurrency in C++ and with it mutex, conditional variables and threads.
 
 #### What is a capture list in a lambda expression?
@@ -12,14 +12,15 @@ I imagine it as a list of parameters for a normal function.
 It means that the variable is passed as a reference, which means we can change the value of the variable in the list inside of the lambda function.
 
 #### When could capturing data by reference [&] be useful?
-When you want to change the value of the variable inside of the function.
-An example could when we maybe want to make a lambda function for the Binary tree nodes in lab 05.
+When you want to change the value of a variable that is outside of the function, inside of the function.
+An example could when we maybe want to make a lambda function for the Binary tree nodes in lab 0t.
 
 #### What does {4} in the code below do?
 ```
         A * p = new A {4} ;
 ```
 It means that we set the integer inside of the struct `A` to be 4.
+If it is the struct used for the smartpointers exercises then it would specifically mean that we are setting the data field to be 4.
 
 #### Why is it a compile error to call foo with a unique_ptr without a move?
 ```
@@ -56,13 +57,20 @@ Which we see if we print out its value after we have called `move()`
 
 #### What is the use of a weak_ptr?
 To give temporary ownership of objects.
-So in a way it can be used to track other objects and also be used to accessed only if it exists, 
+So in a way it can be used to track other objects and also be used for objects that are accessed only if it exists, 
 as it may be deleted at any moment outside our scope.
 It can also be used to break reference cycles that are formed from objects managed by shared_ptr:s.
 
 #### How do you create a unique_ptr with a special deleter?
 By creating a lambda function and passing it to the constructor when you create the unique_ptr.
 You can also create the lambda function in the passing of the function.
+Like so:
+```C++
+unique_ptr<B, function<void(B*)>> pb1(new B[2], [](B* p)
+{
+	delete[] p;
+});
+```
 
 #### What is _decltype_ ?
 It is to declare the type of a variable from an expression.
@@ -82,7 +90,7 @@ The lock is a local variable so when the lock goes out of scope it will call the
 And when it calls the desctructor (ie when it goes out of scope) it will release ownership of and unlock the mutex we passed to it, if it owned it.
 
 #### What is the difference between [unique_lock](http://en.cppreference.com/w/cpp/thread/unique_lock) and [lock_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)
-A unique_lock can be unlocked and locked, whilst a lock_guard is locked on in the constructor and unlocked in the destructor.
+A unique_lock can be unlocked and locked, whilst a lock_guard is locked in the constructor and unlocked in the destructor.
 
 #### Do the integers _hyenasInside_, _gnusInside_ need be [atomic](http://en.cppreference.com/w/cpp/atomic/atomic)?
 Yes they have to be atomic.
@@ -107,11 +115,12 @@ for(const auto& n : map ) {
 
 #### When printing an unordered_map, why is the items not printed in the order they were inserted?
 Because that is how unordered maps are defined.
-They use hashing methods depended on the key for the order rather then the order of the key.
+They use hashing methods depended on the key for the order rather then the order that they were inserted.
 The values are organized into buckets, where the hash of the key decides which bucket it goes in.
 
 #### In what order would the items be printed if a map was used instead of an unordered_map?
 Its order depends on the keys of the map.
+In the case of keys of the type int, it would be in increasing order.
 
 #### How did you implement turning on/off trace outputs? Compile time, runtime or both? Ellaborate over your decision
 I decided that you can turn it on/off as an argument when you execute the program.
