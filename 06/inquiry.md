@@ -61,33 +61,68 @@ as it may be deleted at any moment outside our scope.
 It can also be used to break reference cycles that are formed from objects managed by shared_ptr:s.
 
 #### How do you create a unique_ptr with a special deleter?
-
+By creating a lambda function and passing it to the constructor when you create the unique_ptr.
+You can also create the lambda function in the passing of the function.
 
 #### What is _decltype_ ?
-
+It is to declare the type of a variable from an expression.
+It is used to declare types that are impossible or hard to declare from standard notation.
 
 #### What is std::function?
+It is a class template for general functions.
+So you can store most functions in this class and it is very useful when working with lambda functions.
 
 ### Concurrency
 #### What is [this] in the lambda function sent to the condition_variable's wait-method? Why is [this] needed?
-
+`this` is a pointer to the object that you are in when you are inside of one of its methods.
+It is needed in this particular circumstance so we can access its data members `gnusInside` & `hyenasInside` inside of the lambda function where we check if they are zero or not.
 
 #### Why is the lock a local variable? What happens when the variable goes out of scope?
+The lock is a local variable so when the lock goes out of scope it will call the destructor.
+And when it calls the desctructor (ie when it goes out of scope) it will release ownership of and unlock the mutex we passed to it, if it owned it.
 
 #### What is the difference between [unique_lock](http://en.cppreference.com/w/cpp/thread/unique_lock) and [lock_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)
+A unique_lock can be unlocked and locked, whilst a lock_guard is locked on in the constructor and unlocked in the destructor.
 
 #### Do the integers _hyenasInside_, _gnusInside_ need be [atomic](http://en.cppreference.com/w/cpp/atomic/atomic)?
+Yes they have to be atomic.
+We need them to be atomic so that they can handle having multiple threads trying to access and change the variable.
+Atomic handles this.
 
 #### Describe how .wait and .notifyall() works. Is any call blocking, and what does blocking mean?
+`wait` works in the way that it blocks the thread until the conditional variable is notified.
+And even if it is notified it might still block because we can specify a condition to be met before it stops blocking.
+It gets notified through `notifyall()` and `notifyone()`.
+Notifyall works in the way that all conditional_variables that are waiting on the same conditional_variable that we are notifying from will awake,
+and if their condition is met (if supplied) will stop blocking.
+Blocking means that the thread will put on a list of threads that are waiting to be notified from the same conditional_variable.
+A blocked thread will not move, nor execute any instructions.
 
 #### Write code that iterates over an unordered_map and prints each key and value
+```C++
+for(const auto& n : map ) {
+	std::cout << "Key:" << n.first << " Value:" << n.second << "\n";
+}
+```
 
 #### When printing an unordered_map, why is the items not printed in the order they were inserted?
+Because that is how unordered maps are defined.
+They use hashing methods depended on the key for the order rather then the order of the key.
+The values are organized into buckets, where the hash of the key decides which bucket it goes in.
 
 #### In what order would the items be printed if a map was used instead of an unordered_map?
+Its order depends on the keys of the map.
 
 #### How did you implement turning on/off trace outputs? Compile time, runtime or both? Ellaborate over your decision
+I decided that you can turn it on/off as an argument when you execute the program.
+How I implemented it in code is a bool value that we set true or false depending on the argument we sent when started the program.
+This bool is stored in WaterManager class and we have an if statement infront of all the traces.
+Now this isn't the most fastest solution to the problem, but it was the one I could do the fastest considering the reallife time constraints I had.
+Another method I could have used are conditional inclusion to decide which parts it should compile.
 
 #### What information did you print out in your trace output from the watercave? Ellaborate over your decision
+I did not add more trace output than in the example as I felt it was sufficient.
 
 #### Do you prefer initializing your thread with a function or function object (functor)
+I think depends on the circumstances.
+In this situation I think I prefer initializing with a normal function as I didn't feel a need to encapsulate it like you can do with a functor.

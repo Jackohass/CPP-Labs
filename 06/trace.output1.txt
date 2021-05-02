@@ -1,0 +1,108 @@
+Key:Gnu 144459520 Value:Hyena 2
+Key:136066816 Value:Hyena 1
+Key:127674112 Value:Hyena 0
+0 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 1
+Gnu 2 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Hyena 0 is thristy
+Gnu 3 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Gnu 0 finished drinking and exits the watercave
+Gnu 1 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Hyena 1 is thristy
+Gnu 0 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 4
+Gnu 2 finished drinking and exits the watercave
+Gnu 3 finished drinking and exits the watercave
+Hyena 2 is thristy
+Gnu 0 finished drinking and exits the watercave
+Gnu 3 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 1 finished drinking and exits the watercave
+Gnu 2 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 0 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Gnu 3 finished drinking and exits the watercave
+Gnu 0 finished drinking and exits the watercave
+Gnu 1 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 0 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Gnu 3 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 4
+Gnu 2 finished drinking and exits the watercave
+Gnu 0 finished drinking and exits the watercave
+Gnu 1 finished drinking and exits the watercave
+Gnu 2 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 0 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Gnu 3 finished drinking and exits the watercave
+Gnu 3 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Gnu 2 finished drinking and exits the watercave
+Gnu 0 finished drinking and exits the watercave
+Gnu 1 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 3 finished drinking and exits the watercave
+Gnu 3 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 1 finished drinking and exits the watercave
+Gnu 2 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 1 is thristy
+A gnu enters the watercave      hyenas = 0      gnu = 3
+Gnu 1 finished drinking and exits the watercave
+Gnu 2 finished drinking and exits the watercave
+Gnu 3 finished drinking and exits the watercave
+A hyena enters the watercave    hyenas = 3      gnu = 0
+A hyena enters the watercave    hyenas = 2      gnu = 0
+A hyena enters the watercave    hyenas = 3      gnu = 0
+Gnu 2 is thristy
+Gnu 1 is thristy
+Hyena 2 finished drinking and exits the watercave
+Hyena 1 finished drinking and exits the watercave
+Hyena 0 finished drinking and exits the watercave
+A gnu enters the watercave      hyenas = 0      gnu = 2
+A gnu enters the watercave      hyenas = 0      gnu = 2
+Gnu 1 finished drinking and exits the watercave
+Hyena 1 is thristy
+Hyena 0 is thristy
+Hyena 2 is thristy
+Gnu 2 finished drinking and exits the watercave
+A hyena enters the watercave    hyenas = 3      gnu = 0
+A hyena enters the watercave    hyenas = 3      gnu = 0
+A hyena enters the watercave    hyenas = 3      gnu = 0
+Hyena 2 finished drinking and exits the watercave
+Hyena 1 finished drinking and exits the watercave
+Hyena 0 finished drinking and exits the watercave
+Hyena 1 is thristy
+A hyena enters the watercave    hyenas = 1      gnu = 0
+Hyena 0 is thristy
+A hyena enters the watercave    hyenas = 2      gnu = 0
+Hyena 2 is thristy
+A hyena enters the watercave    hyenas = 3      gnu = 0
+Hyena 1 finished drinking and exits the watercave
+Hyena 0 finished drinking and exits the watercave
+Hyena 2 finished drinking and exits the watercave
+Hyena 0 is thristy
+A hyena enters the watercave    hyenas = 1      gnu = 0
+Hyena 1 is thristy
+A hyena enters the watercave    hyenas = 2      gnu = 0
+Hyena 1 finished drinking and exits the watercave
+Hyena 2 is thristy
+A hyena enters the watercave    hyenas = 2      gnu = 0
+Hyena 2 finished drinking and exits the watercave
+Hyena 0 finished drinking and exits the watercave
+Hyena 1 is thristy
+A hyena enters the watercave    hyenas = 1      gnu = 0
+Hyena 1 finished drinking and exits the watercave
+Hyena 0 is thristy
+A hyena enters the watercave    hyenas = 1      gnu = 0
+Hyena 2 is thristy
+A hyena enters the watercave    hyenas = 2      gnu = 0
+Hyena 0 finished drinking and exits the watercave
+Hyena 2 finished drinking and exits the watercave

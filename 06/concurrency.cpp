@@ -90,6 +90,9 @@ int main(int argc, char *argv[])
         threadvec.push_back(thread(hyena, watermanager));
         watermanager->insertAnimal(threadvec[i+nrGnus].get_id(), "Hyena " + to_string(i));
     }
+    for(const auto& n : watermanager->animals) {
+        std::cout << "Key:" << n.first << " Value:" << n.second << "\n";
+    }
     for (auto& thread : threadvec) thread.join();
 
     delete watermanager;
