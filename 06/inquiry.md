@@ -1,4 +1,4 @@
-# InquiryTh
+# Inquiry
 ## Answers
 #### What did you learn in this assignement?
 
