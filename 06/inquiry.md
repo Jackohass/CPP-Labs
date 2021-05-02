@@ -1,4 +1,4 @@
-# Inquiry
+# InquiryTh
 ## Answers
 #### What did you learn in this assignement?
 
@@ -26,6 +26,22 @@
 I never had a memory leak when I didn't use move and when I use it. I have the output files to show that it didn't detect any leaks:
 * [Without move](valgrind-smartpointersNoMove.txt)
 * [With move](valgrind-smartpointersWithMove.txt)
+However when I used the shared_pointer for the part of the assignment about weak_ptr's then it would get memory errors.
+When I used move it would get problems.
+```
+foo2(move(sa));
+weak_ptr<A> wa = sa;
+cout << wa.lock()->data << endl;
+```
+
+When I didn't use move, it worked.
+```
+foo2(sa);
+weak_ptr<A> wa = sa;
+cout << wa.lock()->data << endl;
+```
+
+I think it is because `move()`
 
 #### What is the use of a weak_ptr?
 

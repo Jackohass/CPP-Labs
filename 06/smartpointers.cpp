@@ -30,6 +30,7 @@ int main()
     cout << sa -> data << endl;
     foo2(sa);
     //foo2(move(sa));
+    cout << sa << endl;
 
     //weak_ptr<A> wa(new A {5});
     weak_ptr<A> wa = sa;
