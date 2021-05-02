@@ -41,7 +41,8 @@ weak_ptr<A> wa = sa;
 cout << wa.lock()->data << endl;
 ```
 
-I think it is because `move()`
+I think it is because `move()` "moves from" the passed object. So that would mean that in `move(sa)` that sa would be null after we moved it.
+Which we see if we print out its value after we have called `move()`
 
 #### What is the use of a weak_ptr?
 

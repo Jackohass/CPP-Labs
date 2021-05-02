@@ -28,8 +28,8 @@ int main()
 
     shared_ptr<A> sa(new A {5});
     cout << sa -> data << endl;
-    foo2(sa);
-    //foo2(move(sa));
+    //foo2(sa);
+    foo2(move(sa));
     cout << sa << endl;
 
     //weak_ptr<A> wa(new A {5});
