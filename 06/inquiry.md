@@ -5,8 +5,8 @@ In this assignment I learnt about about lambda functions, memory handling, weak_
 I also learnt about concurrency in C++ and with it mutex, conditional variables and threads.
 
 #### What is a capture list in a lambda expression?
-The capture list defines what variables that are accessible inside of the lambda function.
-I imagine it as a list of parameters for a normal function.
+The capture list defines what variables that are accessible inside of the lambda function, 
+without having to be specifically passed to the function.
 
 #### What does & mean inside the capture list?
 It means that the variable is passed as a reference, which means we can change the value of the variable in the list inside of the lambda function.
